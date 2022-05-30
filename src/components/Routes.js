@@ -1,30 +1,31 @@
 import React from 'react'
 import Navbar from './NavBar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route,} from 'react-router-dom';
 import Table from '../pages/ControlRoomTable';
 import AddPs from '../pages/AddPoliceStation';
 import LocDis from '../pages/LocationDistribution';
-import Statistics from '../pages/Statistics';
+import Stats from '../pages/Statistics';
 import Log from '../pages/Login';
 import Table1 from '../pages/AssignedCases';
 import Table2 from '../pages/UnassignedCases';
-const NavCheck=()=>{
+import PieChart from '../pages/Piechart';
+import Linegraph from '../pages/LineGraph';
+const AuthCheck=()=>{
+  const authenticated=localStorage.getItem("Auth");
     return(
-         <Router>
-           <Routes>
-           <Route path='/Log' exact element={<Log />}/>
-           </Routes>
-        <Navbar />
+         <BrowserRouter>
         <Routes>
-          <Route path='/' exact element ={<Table />}/>
-          <Route path='/Table1' element={<Table1 />} />
-          <Route path='/Table2' element= {<Table2 />} />
-          <Route path='/Table' element={<Table />} />
-          <Route path='/AddPs' element={<AddPs />} />
-          <Route path='/LocDis' element={<LocDis />} />
-          <Route path='/Statistics' element={<Statistics />} />
+
+          {!authenticated &&  <Route path='/Log' element={<Log />}/>}
+                <Route path='/' element={<Log/>} />
+                <Route path='/Table1'  element={<Table1 />} />
+                <Route path='/Table2'  element= {<Table2 />} />
+                <Route path='/Table'  element={<Table />} />
+                <Route path='/AddPs'  element={<AddPs />} />
+                <Route path='/LocDis'  element={<LocDis />} />
+                <Route path='/Stats'  element={<Stats />} />
         </Routes>
-      </Router>
+         </BrowserRouter>
     );
 };
-export default NavCheck;
+export default AuthCheck;

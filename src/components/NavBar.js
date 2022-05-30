@@ -1,8 +1,88 @@
+// import React, { useState } from 'react';
+// import {
+//   MDBContainer,
+//   MDBNavbar,
+//   MDBNavbarBrand,
+//   MDBNavbarToggler,
+//   MDBIcon,
+//   MDBNavbarNav,
+//   MDBNavbarItem,
+//   MDBNavbarLink,
+//   MDBBtn,
+//   MDBDropdown,
+//   MDBDropdownToggle,
+//   MDBDropdownMenu,
+//   MDBDropdownItem,
+//   MDBDropdownLink,
+//   MDBCollapse
+// } from 'mdb-react-ui-kit';
+
+// export default function App() {
+//   const [showBasic, setShowBasic] = useState(false);
+
+//   return (
+//     <MDBNavbar expand='lg' light bgColor='light'>
+//       <MDBContainer fluid>
+//         <MDBNavbarBrand href='#'>Brand</MDBNavbarBrand>
+
+//         <MDBNavbarToggler
+//           aria-controls='navbarSupportedContent'
+//           aria-expanded='false'
+//           aria-label='Toggle navigation'
+//           onClick={() => setShowBasic(!showBasic)}
+//         >
+//           <MDBIcon icon='bars' fas />
+//         </MDBNavbarToggler>
+
+//         <MDBCollapse navbar show={showBasic}>
+//           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
+//             <MDBNavbarItem>
+//               <MDBNavbarLink active aria-current='page' href='#'>
+//                 Home
+//               </MDBNavbarLink>
+//             </MDBNavbarItem>
+//             <MDBNavbarItem>
+//               <MDBNavbarLink href='#'>Link</MDBNavbarLink>
+//             </MDBNavbarItem>
+
+//             <MDBNavbarItem>
+//               <MDBDropdown>
+//                 <MDBDropdownToggle tag='a' className='nav-link'>
+//                   Cases
+//                 </MDBDropdownToggle>
+//                 <MDBDropdownMenu>
+//                   <MDBDropdownItem>
+//                     <MDBDropdownLink href='/Table'> All Cases</MDBDropdownLink>
+//                   </MDBDropdownItem>
+//                   <MDBDropdownItem>
+//                     <MDBDropdownLink href='/Table1'>Assigned Cases</MDBDropdownLink>
+//                   </MDBDropdownItem>
+//                   <MDBDropdownItem>
+//                     <MDBDropdownLink href='/Table2'>Unassigned Cases</MDBDropdownLink>
+//                   </MDBDropdownItem>
+//                 </MDBDropdownMenu>
+//               </MDBDropdown>
+//             </MDBNavbarItem>
+
+//             <MDBNavbarItem>
+//               <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
+//                 Disabled
+//               </MDBNavbarLink>
+//             </MDBNavbarItem>
+//           </MDBNavbarNav>
+//         </MDBCollapse>
+//       </MDBContainer>
+//     </MDBNavbar>
+//   );
+// }
+
+
+
+
 import React from 'react'
 import { Button, Navbar, NavbarBrand, NavDropdown } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
+
 import {
   Nav,
   NavLink,
@@ -22,7 +102,7 @@ const Navba = () => {
         <Bars />
         <NavMenu className='mr-auto'>
         <Dropdown>
-        <Dropdown.Toggle variant="#00203FFF">
+        <Dropdown.Toggle>
           Control Table
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -46,11 +126,29 @@ const Navba = () => {
           <NavLink to='/LocDis' activeStyle>
            Location Distribution
           </NavLink>
-          <NavLink to='/statistics' activeStyle>
+          <NavLink to='/Stats' activeStyle>
             Statistics
           </NavLink>
         </NavMenu>
-        <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+        {/* <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+        <Dropdown>
+        <Dropdown.Toggle variant="#00203FFF">
+          Statistics
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item href='/PieChart'>
+            Pie Charts
+          </Dropdown.Item>
+          <Dropdown.Item style={{color:'green'}} href='/Linegraph'>
+            Line Graph
+          </Dropdown.Item>
+          <Dropdown.Item href="#">  
+            Reserve
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      </div> */}
+        {/* <div class="mx-auto my-2 order-0 order-md-1 position-relative">
         <Dropdown>
         <Dropdown.Toggle variant="#00203FFF">
           FILTER
@@ -70,7 +168,10 @@ const Navba = () => {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-        </div>
+      </div> */}
+      <NavLink className={"ms-auto"} style={{color:'red', marginInlineStart:'100px', float:'right'}} to='/' activeStyle>
+            Log Out
+          </NavLink>
       </Nav>
     </>
   );

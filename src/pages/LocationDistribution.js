@@ -1,12 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import Navbar from '../components/NavBar';
 
 const LocDis= () => {
 return (
   <div>
+    <Navbar/>
     <h1>
-      Hi
+      HI
     </h1>
   </div>
 );

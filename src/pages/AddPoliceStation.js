@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import "./app.css";
 import FormInput from "../components/FormInput";
 import { Alert } from "react-bootstrap";
-
+import Navbar from '../components/NavBar';
 const police = ['Begumpet', 'Bowenpally', 'Bollaram', 'Trimulgherry', 'Sulthan_Bazar', 'Chaderghat', 'Afzalgunj', 'Kachiguda', 'Nallakunta', 'Malakpet', 'Saidabad', 'Amberpet', 'Abids', 'Narayanguda', 'Begum_Bazar', 'Gandhinagar', 'Musheerabad', 'Chikkadpally', 'Nampally', 'Ramgopalpet', 'Saifabad', 'Banjara_Hills', 'Jubilee_Hills', 'Panjagutta', 'SR_Nagar', 'Asifnagar', 'Humayunnagar', 'Lunger_House', 'Golconda', 'Tappachabutra',
 'Shahinayathgunj', 'Habeebnagar', 'Kulsumpura', 'Mangalhat', 'Gopalapuram', 'Tukaramgate', 'Lalaguda', 'Chilakalguda', 'Mahankali', 'Marredupally', 'Karkhana', 'Charminar', 'Bahadurpura', 'Kamatipura', 'Hussaini_Alam', 'Kalapattar', 'Mirchowk', 'Dabeerpura', 'Moghalpura', 'Rein_Bazar', 'Falaknuma', 'Chandrayangutta', 'Shalibanda', 'Chatrinaka', 'Kanchanbagah', 'Bhavani_Nagar', 'Madannapet', 'Santoshnagar']
 
@@ -96,6 +96,8 @@ const AddPs = () =>
         setValues({ ...values, [e.target.name]: e.target.value });
       };
     return(
+      <div>
+        <Navbar/>
         <div className="app">
         <form onSubmit={handleSubmit}>
         <h1>
@@ -112,6 +114,7 @@ const AddPs = () =>
         <button style={{marginTop:"20px"}}>  Submit</button>
       </form>
         </div>    
+      </div>
     );
 };
 export default AddPs;

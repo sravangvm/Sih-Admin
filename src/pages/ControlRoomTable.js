@@ -2,7 +2,9 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import * as ReactBootStrap from 'react-bootstrap'
-
+import Navbar from '../components/NavBar';
+import Navba from '../components/NavBar';
+import NavCheck from '../components/Routes';
 const Table=(props)=>{
   const [posts,setPosts]= useState({blogs:[]})
   const [bids, setBids] = useState([0]);
@@ -50,14 +52,15 @@ const Table=(props)=>{
 
 return(     
   <div>
+    <Navbar/>
 <ReactBootStrap.Table striped bordered hover >
   <thead>
     <tr>
-      <th ><button >S.NO</button></th>
-      <th width='1000'> <button>Case Description</button></th>
-      <th ><button>Location</button></th>
-      <th><button >Case Score</button></th>
-      <th><button>Status </button></th>
+      <th >  S.NO   </th>
+      <th width='1000'>  Case Description   </th>
+      <th > Location   </th>
+      <th>  Case Score   </th>
+      <th> Status</th>
     </tr>
   </thead>
   <tbody>
@@ -74,6 +77,18 @@ return(
     }
     </tbody>
 </ReactBootStrap.Table>
+    <div>
+    <h6 style={{fontSize:"20px",color:'green',marginInlineStart:'50%',width:'100px'}}>
+Page:1
+</h6>
+<button style={{float:'left',width:'80px'}}>
+  Previous
+</button>
+<button style={{float:'right',width:'80px'}}>
+Next
+</button>
+    </div>
+
   </div>
 )
 }

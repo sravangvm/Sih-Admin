@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Alert, Card } from "react-bootstrap";
-import header from "react-bootstrap-table-next/lib/src/header";
-
 const Log = () => {
+  let Auth=useState("");
   const [user, setUser] = useState("");
   const [password, setpassword] = useState("");
   const [msg, setmsg] = useState([]);
@@ -16,18 +15,22 @@ const Log = () => {
       method: "POST",
       headers:{
       "X-API-Key": "ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734",
-      "x-access-token": ""
+      "x-access-token": "",
+      "Content-Type":"application/json"
       },
-
       body: JSON.stringify(body)
     })
       .then((res) => res.json())
       .then((data) => {
         setmsg(data);
-        if (data.status === 200) {
+        if (data.login === true) {
           localStorage.setItem("user", data.user);
-          localStorage.setItem("Auth", true);
-          window.location.href = "http://localhost:3000";
+          sessionStorage.setItem("Auth", true);
+          window.location.href = "http://localhost:3000/Table";
+        }
+        else
+        {
+          alert("INVALID CREDENTIALS");
         }
       });
   };
@@ -67,14 +70,6 @@ const Log = () => {
               </Form>
             </Card.Body>
           </Card>
-
-          {msg != [] && msg.status == 400 ? (
-            <Alert key="alert" variant="alert">
-              Invalid Credentials
-            </Alert>
-          ) : (
-            <div></div>
-          )}
         </div>
       </Container>
     </div>

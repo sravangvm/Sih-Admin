@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import NavCheck from "./components/Routes";
-import Log from "./pages/Login";
+import { Router,Route,Routes } from "react-router-dom";
+import AuthCheck from "./components/Routes";
+
 function  App() {
-  var authenticated = localStorage.getItem("Auth");
-  return <div>
-              {authenticated === "true" && authenticated != null ? (
-            <NavCheck />
-          ) : (
-            <Log />
-          )}
-    </div>;
+  var authenticated = sessionStorage.getItem("Auth");
+  return (
+    <div>   
+      <AuthCheck/>
+    </div>
+    );
 }
 export default  App;

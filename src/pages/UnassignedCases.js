@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import * as ReactBootStrap from 'react-bootstrap'
-
+import Navbar from '../components/NavBar';
 const Table2=()=>{
   const [posts,setPosts]= useState({blogs:[]})
   const [bids, setBids] = useState([0]);
@@ -45,6 +45,7 @@ const Table2=()=>{
   });
 return(     
   <div>
+    <Navbar/>
 <ReactBootStrap.Table striped bordered hover>
   <thead>
     <tr>

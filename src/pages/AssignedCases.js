@@ -2,32 +2,37 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import * as ReactBootStrap from 'react-bootstrap'
+import Navbar from '../components/NavBar';
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 
-const Table1=()=>{
+const Table1=(props)=>{
   const [posts,setPosts]= useState({blogs:[]})
   const [bids, setBids] = useState([0]);
 
-  const ws = new WebSocket("wss://ws.bitstamp.net");
-
+  const ws = io("https://secrep.herokuapp.com/admin/get-cases",[{headers:{
+    "X-API-Key": "ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734"}}]);
   const apiCall = {
     event: "bts:subscribe",
     data: { channel: "order_book_btcusd" },
   };
 
   ws.onopen = (event) => {
+    alert("api")
     ws.send(JSON.stringify(apiCall));
   };
 
   ws.onmessage = function (event) {
     const json = JSON.parse(event.data);
     try {
-      if ((json.event = "data")) {
-        setBids(json.data.bids.slice(0, 1));
+      alert(event.data);
+      if ((json.event = "cases")) {
+        setBids(json.data.bids.slice(0, 30));
       }
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(()=>{
     const fetchPostslist =async()=>{
       const {data}= await axios("https://jsonplaceholder.typicode.com/comments")
@@ -39,13 +44,14 @@ const Table1=()=>{
   const firstBids = bids.map((item) => {
     return (
       <div>
-        <p> {item}</p>
+        <p> {item.victims}</p>
       </div>
     );
   });
 return(     
   <div>
-<ReactBootStrap.Table striped bordered hover>
+    <Navbar/>
+    <ReactBootStrap.Table striped bordered hover>
   <thead>
     <tr>
       <th>S.NO</th>
