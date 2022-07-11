@@ -90,6 +90,10 @@ import {
   NavMenu,
 } from './NavbarElements';
 
+const handleLogout=()=>
+{
+  sessionStorage.clear();
+}
 const Navba = () => {
   return (
     <>
@@ -169,7 +173,8 @@ const Navba = () => {
         </Dropdown.Menu>
       </Dropdown>
       </div> */}
-      <NavLink className={"ms-auto"} style={{color:'red', marginInlineStart:'100px', float:'right'}} to='/' activeStyle>
+      <NavLink className={"ms-auto"} style={{color:'red', marginInlineStart:'100px', float:'right'}} to='/' activeStyle
+      onClick={handleLogout()} >
             Log Out
           </NavLink>
       </Nav>

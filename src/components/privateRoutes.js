@@ -10,14 +10,11 @@ import Table1 from '../pages/AssignedCases';
 import Table2 from '../pages/UnassignedCases';
 import PieChart from '../pages/Piechart';
 import Linegraph from '../pages/LineGraph';
-import BarChart from './BarGraph';
 const AuthCheck=()=>{
   const authenticated=sessionStorage.getItem("Auth");
     return(
          <BrowserRouter>
         <Routes>
-          {!authenticated &&  <Route path='/Log' element={<Log />}/>}
-                <Route path='/' element={<Log/>} />
                 <Route path='/Table1'  element={<Table1 />} />
                 <Route path='/Table2'  element= {<Table2 />} />
                 <Route path='/Table'  element={<Table />} />

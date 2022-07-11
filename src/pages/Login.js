@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Container, Form, Button, Alert, Card } from "react-bootstrap";
 const Log = () => {
   let Auth=useState("");
+  let token=useState("");
   const [user, setUser] = useState("");
   const [password, setpassword] = useState("");
   const [msg, setmsg] = useState([]);
-  const handlesubmit = (e) => {
+  const handlesubmit = async (e) => {
     e.preventDefault();
     let body = {
       user: user,
       password: password,
     };
-    fetch("https://secrep.herokuapp.com/admin/login", {
+    await fetch("https://secrep.herokuapp.com/admin/login", {
       method: "POST",
       headers:{
       "X-API-Key": "ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734",
-      "x-access-token": "",
       "Content-Type":"application/json"
       },
       body: JSON.stringify(body)
@@ -24,6 +24,7 @@ const Log = () => {
       .then((data) => {
         setmsg(data);
         if (data.login === true) {
+          localStorage.setItem("token",data.token);
           localStorage.setItem("user", data.user);
           sessionStorage.setItem("Auth", true);
           window.location.href = "http://localhost:3000/Table";
