@@ -1,73 +1,57 @@
-import React from 'react'
-import { useEffect,useState } from 'react';
-import axios from 'axios';
-import * as ReactBootStrap from 'react-bootstrap'
-import Navbar from '../components/NavBar';
-const Table2=()=>{
-  const [posts,setPosts]= useState({blogs:[]})
-  const [bids, setBids] = useState([0]);
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import * as ReactBootStrap from "react-bootstrap";
+import Navbar from "../components/NavBar";
+import { io } from "socket.io-client";
 
-  const ws = new WebSocket("wss://ws.bitstamp.net");
 
-  const apiCall = {
-    event: "bts:subscribe",
-    data: { channel: "order_book_btcusd" },
-  };
+function Table2() {
 
-  ws.onopen = (event) => {
-    ws.send(JSON.stringify(apiCall));
-  };
+  const [cases,setCases]=useState(null);
+  const [location,setLocation]=useState("Hyderabad");
+  const socket = io("https://secrep.herokuapp.com/admin", {
+      reconnectionDelayMax: 10000,
+      extraHeaders: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    });
+  const handleGetCases = (caseIds) => {
+    console.log('received case ids =>', caseIds)
+    setCases(caseIds.slice(0,60));
+  }
 
-  ws.onmessage = function (event) {
-    const json = JSON.parse(event.data);
-    try {
-      if ((json.event = "data")) {
-        setBids(json.data.bids.slice(0, 1));
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(()=>{
-    const fetchPostslist =async()=>{
-      const {data}= await axios("https://jsonplaceholder.typicode.com/comments")
-      setPosts({blogs:data})
-      console.log(data);
-    }
-    fetchPostslist()
-  },[setPosts])
-  const firstBids = bids.map((item) => {
-    return (
-      <div>
-        <p> {item}</p>
-      </div>
-    );
-  });
-return(     
-  <div>
-    <Navbar/>
-<ReactBootStrap.Table striped bordered hover>
-  <thead>
-    <tr>
-      <th>S.NO</th>
-      <th>Case Name</th>
-      <th>Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-    posts.blogs && posts.blogs.map((item)=>(
-      <tr key={item.id}>
-        <td > {item.id}</td>
-        <td>{item.body}</td>
-        <td>{<div>
-          {firstBids}</div>}</td>
-      </tr>
-    ))
-    }
-    </tbody>
-</ReactBootStrap.Table>
-  </div>
-)
-}
-export default Table2;
+  useEffect(() => {
+    socket.emit('Get_cases')
+    socket.on('static-cases', handleGetCases);
+  }, []);
+  return (
+        <div>
+          <Navbar />
+          <ReactBootStrap.Table striped bordered hover>
+            <thead>
+              <tr>
+              <th >  S.NO   </th>
+              <th width='10'>  Case Description   </th>
+              <th > Location   </th>
+              <th>  Case Score   </th>
+              <th> Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cases&&
+                cases.map((item) => (
+                  <tr key={item}>
+                    <td> {item._id}</td>
+                    <td>{item.desc}</td>
+                    <td>{item.location}</td>
+                    <td> {item.crime_score} </td>
+                    <td style={{ color: (item.Status)==="Unassigned" ? 'red' : 'green' }}>{<div>{(item.Status)==="Unassigned" ? <div>UnSolved</div> : <div>Solved</div>}</div>}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </ReactBootStrap.Table>
+        </div>
+      );
+};
+ export default Table2;

@@ -19,7 +19,7 @@ const AddPs = () =>
           {
             id: 1,
             name: "Location",
-            type: "dropdown",
+            type: "text",
             placeholder: "Loaction",
             errorMessage:
               "Location shouldn't include any special character!",
@@ -64,34 +64,36 @@ const AddPs = () =>
       const handleSubmit = e => {
         this.setState({ buttonload : true });
         alert("Registration Succesfull!!")
-        //e.preventDefault();
-        // this.props.form.validateFields((err, values) => {
-        //   if (!err) {
-        //     fetch("api/Authentication/Login", {
-        //       method: 'POST',
-        //       headers: {'Content-Type':'application/json'},
-        //       body: JSON.stringify({
-        //         data:{
-        //           Location : this.props.Location,
-        //           Username : values.username,
-        //           Password : values.password
-        //         }
-        //       })
-        //      })
-        //     .then(res => res.json())
-        //     .then(
-        //       (result) => {
-        //         console.log(result)
-        //       },
-        //       // Note: it's important to handle errors here
-        //       // instead of a catch() block so that we don't swallow
-        //       // exceptions from actual bugs in components.
-        //       (error) => {
-        //         this.setState({ buttonload : false });
-        //         console.log(error)
-          //    })
-        //  }
-        };    
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+          if (!err) {
+            fetch("api/Authentication/Login", {
+              method: 'POST',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify({
+                data:{
+                  Location : this.props.Location,
+                  Username : values.username,
+                  Password : values.password
+                }
+              })
+             })
+            .then(res => res.json())
+            .then(
+              (result) => {
+                console.log(result)
+              },
+              // Note: it's important to handle errors here
+              // instead of a catch() block so that we don't swallow
+              // exceptions from actual bugs in components.
+              (error) => {
+                this.setState({ buttonload : false });
+                console.log(error)
+             })
+        }
+        }
+        );  
+      }  
       const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
       };
