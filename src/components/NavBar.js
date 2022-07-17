@@ -99,7 +99,7 @@ const Navba = () => {
     <>
       <Navbar  className="justify-content-center">
         <NavbarBrand>
-         Website Name
+         CrimeMaster
         </NavbarBrand>
       </Navbar>
       <Nav>
